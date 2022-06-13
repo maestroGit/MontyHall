@@ -1,0 +1,100 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  width: 100px;
+}
+
+.title {
+  margin: 0px auto;
+}
+
+.main-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.door {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  height: 300px;
+  background-color: rgba(143, 12, 12, 0.817);
+  margin: 10px;
+  border-top: brown solid 20px;
+  border-right: brown solid 20px;
+  border-left: brown solid 20px;
+}
+
+.door:hover {
+  background-color: rgb(255, 13, 0);
+}
+
+.btn-door:focus {
+  background-color: rgb(244, 91, 3);
+  width: 80px;
+}
+
+.btn-yes {
+  margin: 10px;
+  background-color: green;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.btn-yes:hover {
+  background-color: rgb(79, 244, 3);
+}
+
+.btn-no:hover {
+  background-color: rgb(255, 157, 9);
+}
+
+.btn-door:focus {
+  background-color: rgb(244, 91, 3);
+  width: 80px;
+}
+
+.btn-no {
+  margin: 10px;
+  background-color: rgb(251, 40, 29);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.frame {
+  width: 80%;
+  height: 80px;
+  border: black solid;
+  visibility: visible;
+}
+
+.handler {
+  width: 80%;
+  height: 10%;
+  margin-top: 20px;
+}
+
+.open {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(131, 146, 154, 0.365);
+}
+
+#goat {
+  width: 100px;
+  visibility: visible;
+}
+
+#grid {
+  margin: 2%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
