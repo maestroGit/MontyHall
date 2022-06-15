@@ -7,7 +7,7 @@ const grid = document.querySelector(".grid");
 
 // Variables
 let cont = 0;
-const options = ['1', '2', '3'];
+const options = ["1", "2", "3"];
 let doorchoosed = [];
 let doorprize = [];
 let doorgoats = [];
@@ -24,14 +24,14 @@ const aleatorio = () => {
   console.log({ num });
   doorprize.push(num);
   console.log("doorprize");
-  console.log(doorprize);
+  console.log(doorprize[0]);
   return num;
 };
 
 // ... para parametros indeterminados
 const drawgoats = (items) => {
   console.log("puertas con goat");
-  console.log(items)
+  console.log(items);
   console.log("options");
   console.log(options);
   let goatfoto = document.createElement("img");
@@ -42,8 +42,16 @@ const drawgoats = (items) => {
   let a = options[0];
   let b = options[1];
   console.log(a + "--" + b);
-  doors[a].appendChild(goatfoto);
+  //doors[a].appendChild(goatfoto);
+  doors[a].innerHTML = `<img id='carprize' src=./img/goat.png>`;
   doors[a].classList.add("open");
+  // elimnar class frame
+  // recorrer todos los elementos frame y eliminar los del div del goat
+  let idframe = document.getElementById("goat");
+  console.log(idframe);
+  //idframe.visibility = "hidden";
+  let frame = document.getElementsByClassName("frame");
+  console.log(frame);
   //}
 };
 
@@ -75,7 +83,7 @@ const showcar = () => {
         console.log({ cont });
       } else {
         console.log("seleccion no ganadora");
-        drawcar(numdrawale);
+        drawcar(doorprize[0]);
       }
     }
   }
@@ -84,6 +92,9 @@ const showcar = () => {
 const selectdoor = (e) => {
   seleccion = e.target.id;
   console.log({ seleccion });
+  let puertaselcionada = document.getElementById(seleccion);
+  //console.log(puertaselcionada);
+  puertaselcionada.classList.add("doorselec");
   // si array vaciando
   if (doorchoosed.length <= 0) {
     doorchoosed.push(seleccion);
@@ -94,30 +105,33 @@ const selectdoor = (e) => {
     let indxoption = options.find((element) => element === seleccion);
     console.log(indxoption);
     options.splice(indice, 1);
-  
-  
-  console.log("options door changes");
-  console.log(options);
+    console.log("options door changes");
+    console.log(options);
     document.getElementById(
       "tit"
     ).innerHTML = `<h1>Select ${doorchoosed}. Open one door</h1>`;
   } else {
+    alldoors = document.getElementsByClassName("door");
+    console.log(alldoors);
+    for (let item of alldoors) {
+      console.log(item.id);
+      item.classList.remove("doorselec");
+    }
+    //puertaselcionada.classList.add('door');
     doorchoosed.pop();
     console.log("pop remove");
+    puertaselcionada.classList.add("doorselec");
     doorchoosed.push(seleccion);
     console.log(doorchoosed);
-    //doors[doorchoosed].style.backgroundColor ="red";
     document.getElementById(
       "tit"
     ).innerHTML = `<h1>Do you want checked door: ${doorchoosed}</h1>`;
   }
-  //const UserPoint = { Xcoord: e.clientX, Ycoord: e.clientY };
-  //let doorid = document.getElementById("main").value;
-  //console.log(UserPoint);
 };
 
 const manteinselection = () => {
   // quitar lisener
+  btnswitch.removeEventListener("click", manteinselection);
   // eleminar visibility grid o btn
   console.log("mantein selection");
   // checked to see if he wants o lost
@@ -130,30 +144,35 @@ const changeselection = () => {
   console.log("change selection");
 };
 
+// bug al ejecutar opendoor abre la puerta seleccionada cuando debe abrir la no seleciona
+// si la seleccion es una de las dos opciones de puertas disponibles
+
 const openOnedoor = () => {
-  console.log(doorchoosed[0]);
-  console.log(typeof(doorchoosed[0]));
-  console.log(doorprize[0]);
-  console.log(typeof(doorprize[0]));
-  console.log('options');
+  console.log("open door");
+  console.log("seleción : ", doorchoosed[0]);
+  console.log(typeof doorchoosed[0]);
+  console.log("coche: ",doorprize[0]);
+  console.log(typeof doorprize[0]);
+  console.log("optiones no seleciondas");
   console.log(options);
   /*
   const twodoors = 
    */
   btnswitch.removeEventListener("click", openOnedoor);
-  console.log("dos puertas no selecionadas:" + options);
+  console.log("puertas no selecionadas : " + options);
   // si options contiene las misma puerta q prize abrimos la otra
-  let goat = options.filter(items=> {
-    let item =Number(items);
+  let goat = options.filter((items) => {
+    let item = Number(items);
     console.log(items);
     console.log(item);
     console.log(doorprize[0]);
-    if(item !== doorprize[0]){
-      console.log('Añadimos a goat las puertas q no contienen prize');
-      return item
-    };
+    if (item !== doorprize[0]) {
+      console.log("Añadimos a goat las puertas q no contienen prize");
+      console.log(item);
+      return item;
+    }
   });
-  console.log('goat')
+  console.log("goat");
   console.log(goat); //false
   // busca cual de las dos puertas no selecionadas es una goat y
   // y pasa por parametro a drawgoats. Si son las dos goats haz random y pasa una de ellas
@@ -195,9 +214,8 @@ const win = (selectdoor, prizedoor) => {
       "Sorry, YOU LOST, ",
       selectdoor + "is diferent than " + prizedoor
     );
-    document.getElementById(
-      "tit"
-    ).innerHTML = `<h1>Sorry, YOU LOST</h1>`;
+    document.getElementById("tit").innerHTML = `<h1>Sorry, YOU LOST</h1>`;
+    showcar();
   }
 };
 

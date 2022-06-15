@@ -30,6 +30,19 @@ img {
   border-left: brown solid 20px;
 }
 
+.doorselec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  height: 300px;
+  background-color: rgb(247, 3, 3);
+  margin: 10px;
+  border-top: brown solid 20px;
+  border-right: brown solid 20px;
+  border-left: brown solid 20px;
+}
+
 .door:hover {
   background-color: rgb(255, 13, 0);
 }
