@@ -108,6 +108,9 @@ const selectdoor = (e) => {
   let puertaselcionada = document.getElementById(seleccion);
   //console.log(puertaselcionada);
   puertaselcionada.classList.add("doorselec");
+
+  // visulaizar boton open door en este momento
+  // añadir visualizar 
   
   // si array vaciando
   if (doorchoosed.length <= 0) {
@@ -155,7 +158,13 @@ const manteinselection = () => {
 };
 
 const changeselection = () => {
-  console.log("change selection");
+  //check win
+  win();
+  // console.log("Sorry You Lost selection");
+  // document.getElementById(
+  //   "tit"
+  // ).innerHTML = `<h1>YOU LOST, I AM SORRY/h1>`;
+  drawcar(doorprize[0]);
 };
 
 // bug al ejecutar opendoor abre la puerta seleccionada cuando debe abrir la no seleciona
