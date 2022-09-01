@@ -7,17 +7,21 @@ const grid = document.querySelector(".grid");
 
 // Variables
 let cont = 0;
-const options = ["1", "2", "3"];
+const puertasnumeros = ["1", "2", "3"];
 let doorchoosed = [];
 let doorprize = [];
 let doorgoats = [];
 
+
+
 //numero aleatorio del 0 al 2
+
 // Math.random() returns a Number between 0 (inclusive) and 1 (exclusive). So we have an interval like this: 1 -> Tamaño img
 // const numRandom = (size) => {
 //   return Math.floor(Math.random() * size);
 // };
 const aleatorio = () => {
+  //doorchoosed=[];
   let randxdos = Math.random() * 3 + 1;
   //console.log(randxdos);
   let num = Math.floor(randxdos);
@@ -29,22 +33,28 @@ const aleatorio = () => {
 };
 
 // ... para parametros indeterminados
-const drawgoats = (items) => {
+const drawgoats = () => {
   console.log("puertas con goat");
-  console.log(items);
-  console.log("options");
-  console.log(options);
+  console.log("puertasnumeros");
+  console.log(puertasnumeros);
   let goatfoto = document.createElement("img");
   goatfoto.setAttribute("src", "./img/goat.png");
   goatfoto.setAttribute("id", "goat");
-  console.log("options");
-  console.log(options);
-  let a = options[0];
-  let b = options[1];
-  console.log(a + "--" + b);
+  console.log("puertasnumeros");
+  console.log(puertasnumeros);
+  let a = puertasnumeros[0];
+  indexa = a-1;
+  console.log({a})
+  console.log({indexa});
+
+  if(puertasnumeros.length > 1){
+    let b = puertasnumeros[1];
+    console.log(a + "--" + b);
+  }
+  console.log(a + "--");
   //doors[a].appendChild(goatfoto);
-  doors[a].innerHTML = `<img id='carprize' src=./img/goat.png>`;
-  doors[a].classList.add("open");
+  doors[indexa].innerHTML = `<img src=./img/goat.png>`;
+  doors[indexa].classList.add("open");
   // elimnar class frame
   // recorrer todos los elementos frame y eliminar los del div del goat
   let idframe = document.getElementById("goat");
@@ -65,6 +75,7 @@ const drawcar = (doornumber) => {
   carimg.style.visibility = "visible";
 };
 
+// Show the car prize 
 const showcar = () => {
   if (cont > 0) {
     return;
@@ -79,6 +90,7 @@ const showcar = () => {
       //console.log({ numdrawale });
       if (doorchoosed[0] == doorprize[0]) {
         drawcar(doorprize[0]);
+        console.log("seleccion ganadora");
         cont++;
         console.log({ cont });
       } else {
@@ -89,24 +101,26 @@ const showcar = () => {
   }
 };
 
+// Register event with the the id of the door selected
 const selectdoor = (e) => {
   seleccion = e.target.id;
   console.log({ seleccion });
   let puertaselcionada = document.getElementById(seleccion);
   //console.log(puertaselcionada);
   puertaselcionada.classList.add("doorselec");
+  
   // si array vaciando
   if (doorchoosed.length <= 0) {
     doorchoosed.push(seleccion);
-    console.log(doorchoosed[0]);
+    console.log(doorchoosed[0]);// puerta selecciona añadida a la array en la primera posicion
     //puertas no seleccionadas
-    let indice = options.indexOf(seleccion);
+    let indice = puertasnumeros.indexOf(seleccion);
     console.log({ indice });
-    let indxoption = options.find((element) => element === seleccion);
+    let indxoption = puertasnumeros.find((element) => element === indice);
     console.log(indxoption);
-    options.splice(indice, 1);
-    console.log("options door changes");
-    console.log(options);
+    puertasnumeros.splice(indice, 1);
+    console.log("puertasnumeros door changes");
+    console.log(puertasnumeros);
     document.getElementById(
       "tit"
     ).innerHTML = `<h1>Select ${doorchoosed}. Open one door</h1>`;
@@ -153,18 +167,27 @@ const openOnedoor = () => {
   console.log(typeof doorchoosed[0]);
   console.log("coche: ",doorprize[0]);
   console.log(typeof doorprize[0]);
-  console.log("optiones no seleciondas");
-  console.log(options);
+  console.log("puertas no seleciondas");
+  console.log(puertasnumeros);
   /*
   const twodoors = 
    */
   btnswitch.removeEventListener("click", openOnedoor);
-  console.log("puertas no selecionadas : " + options);
-  // si options contiene las misma puerta q prize abrimos la otra
-  let goat = options.filter((items) => {
+  console.log("puertas no selecionadas : " + puertasnumeros);
+  // Tengo las opciones no seleccionas en puertasnumeros
+  // si puertasnumeros contiene el mismo valor de puerta que prize,
+  // lo eliminamos del aray puertasnumeros quedando solo el valor de la puerta q hay q abrir
+  //  si no lo contiene abrimos uno u otro de manera aleatoria
+
+  puertasnumeros.filter((items, index) => {
+    console.log({items});
+    if (items == doorprize[0]){
+      console.log('item === doorprize')
+      console.log(index);
+      puertasnumeros.splice(index, 1);
+      console.log({puertasnumeros})
+    };
     let item = Number(items);
-    console.log(items);
-    console.log(item);
     console.log(doorprize[0]);
     if (item !== doorprize[0]) {
       console.log("Añadimos a goat las puertas q no contienen prize");
@@ -172,11 +195,10 @@ const openOnedoor = () => {
       return item;
     }
   });
-  console.log("goat");
-  console.log(goat); //false
+  
   // busca cual de las dos puertas no selecionadas es una goat y
   // y pasa por parametro a drawgoats. Si son las dos goats haz random y pasa una de ellas
-  drawgoats(goat);
+  drawgoats();
   //btnyes.addEventListener("click", drawgoats);
   console.log(
     "de las dos, abrimos la q contenga una cabra si en la otra está el premio"
@@ -202,6 +224,7 @@ const openOnedoor = () => {
   btnno.addEventListener("click", manteinselection);
 };
 
+// Check for a match
 const win = (selectdoor, prizedoor) => {
   if (selectdoor == prizedoor) {
     console.log("YOU WIN, CONGRATULATIONS");
@@ -219,16 +242,17 @@ const win = (selectdoor, prizedoor) => {
   }
 };
 
-// Start to define prize position
+// Start to define radom number between 0 and 2 that which will be the prize position
 aleatorio();
 
-// Events
+// Loop through the elements of the doors class by adding an event that active selection door
 for (let i = 0; i < doors.length; i++) {
   doors[i].setAttribute("door-id", i);
   //console.log(doors[i]);
   doors[i].addEventListener("click", selectdoor);
 }
 
+// Added event to buttons
 btnswitch.addEventListener("click", openOnedoor);
 btnshow.addEventListener("click", showcar);
 
