@@ -48,7 +48,7 @@ img {
 }
 
 .btn-door:focus {
-  background-color: rgb(244, 91, 3);
+  background-color: rgb(244, 3, 3);
   width: 80px;
 }
 
@@ -69,8 +69,15 @@ img {
 }
 
 .btn-door:focus {
-  background-color: rgb(244, 91, 3);
+  background-color: rgb(244, 3, 3);
   width: 80px;
+  font-size:14px;
+  font-weight: bold;
+  color:white;
+  border-top: rgb(252, 252, 252) solid 1px;
+  border-bottom: rgb(252, 252, 252) solid 1px;
+  border-left: rgb(252, 252, 252) solid 1px;
+  border-right: rgb(252, 252, 252) solid 1px;
 }
 
 .btn-no {
@@ -110,4 +117,13 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+#btn-switch {
+  visibility: hidden;
+  margin: 10px 35%;
+  background-color: rgb(138, 247, 4);
+  width: 400px;
+  height: 50px;
+  border-radius: 20%;
 }

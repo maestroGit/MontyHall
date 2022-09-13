@@ -108,6 +108,7 @@ const selectdoor = (e) => {
   let puertaselcionada = document.getElementById(seleccion);
   //console.log(puertaselcionada);
   puertaselcionada.classList.add("doorselec");
+  btnswitch.style.visibility= "visible";
 
   // visulaizar boton open door en este momento
   // añadir visualizar 
@@ -182,6 +183,7 @@ const openOnedoor = () => {
   const twodoors = 
    */
   btnswitch.removeEventListener("click", openOnedoor);
+  btnswitch.style.visibility= "hidden";
   console.log("puertas no selecionadas : " + puertasnumeros);
   // Tengo las opciones no seleccionas en puertasnumeros
   // si puertasnumeros contiene el mismo valor de puerta que prize,
@@ -263,7 +265,7 @@ for (let i = 0; i < doors.length; i++) {
 
 // Added event to buttons
 btnswitch.addEventListener("click", openOnedoor);
-btnshow.addEventListener("click", showcar);
+//btnshow.addEventListener("click", showcar);
 
 // https://es.stackoverflow.com/questions/216169/recorrer-elementos-html-con-la-misma-clase-con-javascript
 // function asignar(){
