@@ -21,13 +21,16 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 150px;
-  height: 300px;
-  background-color: rgba(143, 12, 12, 0.817);
+  height: 200px;
+  background-color: rgba(218, 183, 40, 0.817);
   margin: 10px;
+  padding:0px 0px 50px;
   border-top: brown solid 20px;
   border-right: brown solid 20px;
   border-left: brown solid 20px;
+  border-bottom: rgb(242, 215, 215) solid 10px;
 }
 
 .doorselec {
@@ -35,18 +38,20 @@ img {
   flex-direction: column;
   align-items: center;
   width: 150px;
-  height: 300px;
+  height: 200px;
   background-color: rgb(247, 3, 3);
   margin: 10px;
   border-top: brown solid 20px;
   border-right: brown solid 20px;
   border-left: brown solid 20px;
+  border-bottom: rgb(242, 215, 215) solid 20px;
 }
 
-.door:hover {
+/* .door:hover {
   background-color: rgb(255, 13, 0);
-}
+} */
 
+/* tendría que ser seleccionado constnate no focus*/
 .btn-door:focus {
   background-color: rgb(244, 3, 3);
   width: 80px;
@@ -88,7 +93,7 @@ img {
   border-radius: 50%;
 }
 
-.frame {
+#frame {
   width: 80%;
   height: 80px;
   border: black solid;
@@ -98,13 +103,14 @@ img {
 .handler {
   width: 80%;
   height: 10%;
-  margin-top: 20px;
+  margin-top: 50%;
+  font-size: 25px;
 }
 
 .open {
   display: flex;
   flex-direction: column;
-  background-color: rgba(131, 146, 154, 0.365);
+  background-color: rgba(246, 236, 196, 0.817);
 }
 
 #goat {
@@ -121,7 +127,7 @@ img {
 
 #btn-switch {
   visibility: hidden;
-  background-color: rgb(202, 202, 201);
+  background-color: rgba(218, 183, 40, 0.817);
   width: 300px;
   height: 30px;
   border-radius: 10%;
