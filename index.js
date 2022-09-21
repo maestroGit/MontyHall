@@ -10,82 +10,30 @@ let btnno;
 
 // Variables
 let cont = 0;
-const opcionespuertasnumeros = ["1", "2", "3"];
+let opcionespuertasnumeros = ["1", "2", "3"];
 let doorchoosed = [];
 let doorprize = [];
 let doorgoats = [];
+let games = 1;
+let changes = 0;
+let mantein = 0;
+let winers = 0;
+let losers = 0;
 
-//numero aleatorio del 0 al 2
+// Start to define radom number between 0 and 2 that which will be the prize position
 // Math.random() returns a Number between 0 (inclusive) and 1 (exclusive). So we have an interval like this: 1 -> Tamaño img
-// const numRandom = (size) => {
-//   return Math.floor(Math.random() * size);
-// };
+// const numRandom = (size) => {   return Math.floor(Math.random() * size); };
 const aleatorio = () => {
   //doorchoosed=[];
+  doorprize = [];
   let randxdos = Math.random() * 3 + 1;
   //console.log(randxdos);
   let num = Math.floor(randxdos);
-  console.log({ num });
+  //console.log({ num });
   doorprize.push(num);
   console.log("doorprize");
   console.log(doorprize);
   return num;
-};
-
-// ... para parametros indeterminados
-const drawgoats = () => {
-  console.log("opcionespuertasnumeros");
-  console.log(opcionespuertasnumeros);
-  let goatfoto = document.createElement("img");
-  goatfoto.setAttribute("src", "./img/goat.png");
-  goatfoto.setAttribute("id", "goat");
-  console.log("opcionespuertasnumeros");
-  console.log(opcionespuertasnumeros);
-  // ramdom para elegir posicion [0] o [1] del array para pintar cabra aleatoriamenete en una de las dos puertas porque no contienen prize
-  let goat_a = opcionespuertasnumeros[0];
-  indexa = goat_a - 1;
-  console.log({ goat_a });
-  console.log({ indexa });
-  if (opcionespuertasnumeros.length > 1) {
-    let goat_b = opcionespuertasnumeros[1];
-    console.log(goat_a + "- goats opciones -" + goat_b);
-  }
-  console.log(goat_a + "--");
-  //doors[a].appendChild(goatfoto);
-  doors[indexa].innerHTML = `<img src=./img/goat.png>`;
-  doors[indexa].classList.add("open");
-};
-
-const drawcar = (doornumber) => {
-  let indexdoornumber = doornumber - 1;
-  doors[indexdoornumber].classList.add("open");
-  doors[indexdoornumber].innerHTML = `<img id='carprize' src=./img/car.png>`;
-  const carimg = document.getElementById("carprize");
-  carimg.style.visibility = "visible";
-};
-
-// Show the car prize
-const showcar = () => {
-  if (cont > 0) {
-    return;
-  } else {
-    if (doorchoosed.length <= 0) {
-      console.log("selecciona una puerta");
-      document.getElementById(
-        "tit"
-      ).innerHTML = `<h1>Please, you must choose a door</h1>`;
-    } else {
-      if (doorchoosed[0] == doorprize[0]) {
-        drawcar(doorprize[0]);
-        //console.log("seleccion ganadora");
-        cont++;
-        console.log({ cont });
-      } else {
-        //console.log("seleccion no ganadora");
-        drawcar(doorprize[0]);
-      }
-    }
-  }
 };
 
 // Register event with the the id of the door selected
@@ -111,12 +59,10 @@ const selectdoor = (e) => {
     console.log(opcionespuertasnumeros);
     document.getElementById(
       "tit"
-    ).innerHTML = `<h1>Select ${doorchoosed}. Open one door</h1>`;
+    ).innerHTML = `<h1>Select door nº ${doorchoosed}</h1>`;
   } else {
     alldoors = document.getElementsByClassName("door");
-    console.log(alldoors);
     for (let item of alldoors) {
-      console.log(item.id);
       item.classList.remove("doorselec");
     }
     //puertaselcionada.classList.add('door');
@@ -127,43 +73,7 @@ const selectdoor = (e) => {
     console.log(doorchoosed);
     document.getElementById(
       "tit"
-    ).innerHTML = `<h1>Do you want checked door: ${doorchoosed}</h1>`;
-  }
-};
-
-const manteinselection = () => {
-  // quitar lisener
-  btnswitch.removeEventListener("click", manteinselection);
-  // eleminar visibility grid o btn
-  console.log("mantein selection");
-  // checked to see if he wants o lost
-  let doorsel = doorchoosed[0];
-  let doorwin = doorprize[0];
-  win(doorsel, doorwin);
-};
-
-const changeselection = () => {
-  console.log("mantein selection");
-  // quitar lisener
-  btnswitch.removeEventListener("click", manteinselection);
-  // eleminar visibility grid o btn
-  // si seleccion doorselecion == prize y cambias entonce lost,
-  if (doorchoosed[0] == doorprize[0]) {
-    console.log("lost");
-    document.getElementById("tit").innerHTML = `<h1>Sorry you Lost</h1>`;
-    showcar();
-    btns.remove();
-    btnplay.innerHTML = `<button id='replay'>PLAY AGAIN</button>`;
-    document.getElementById("replay").addEventListener("click", start);
-    document.getElementById("replay").style.visibility = "visible";
-    //drawcar(doorprize[0]);
-  } else {
-    //eles{resto codigo}
-    // check not necessary because only it was maintained closed door with the prize
-    let changedoorsel = doorprize[0];
-    let doorwin = doorprize[0];
-    win(changedoorsel, doorwin);
-    drawcar(doorprize[0]);
+    ).innerHTML = `<h1>Checked door: ${doorchoosed}</h1>`;
   }
 };
 
@@ -171,9 +81,9 @@ const openOnedoor = () => {
   console.log("open door");
   console.log("seleción : ", doorchoosed[0]);
   console.log(typeof doorchoosed[0]);
-  console.log("coche: ", doorprize[0]);
+  console.log("prize: ", doorprize[0]);
   console.log(typeof doorprize[0]);
-  console.log("puertas no seleciondas");
+  console.log("puertas no selecciondas");
   console.log(opcionespuertasnumeros);
   btnswitch.removeEventListener("click", openOnedoor);
   btnswitch.style.visibility = "hidden";
@@ -202,7 +112,7 @@ const openOnedoor = () => {
   btns.style.visibility = "visible";
   console.log(typeof btnyes);
   if (btnyes && btnno !== undefined) {
-    console.log('inside if')
+    console.log("inside if");
     btnyes.remove();
     btnno.remove();
   }
@@ -217,7 +127,6 @@ const openOnedoor = () => {
   btnno.textContent = "NO";
   btns.appendChild(btnno);
   btnno.addEventListener("click", manteinselection);
-
   // Loop through the elements of the doors class by removing an event that active selection door
   for (let i = 0; i < doors.length; i++) {
     doors[i].setAttribute("door-id", i);
@@ -227,30 +136,139 @@ const openOnedoor = () => {
   }
 };
 
+// ... para parametros indeterminados
+const drawgoats = () => {
+  console.log("opcionespuertasnumeros");
+  console.log(opcionespuertasnumeros);
+  let goatfoto = document.createElement("img");
+  goatfoto.setAttribute("src", "./img/goat.png");
+  goatfoto.setAttribute("id", "goat");
+  console.log("opcionespuertasnumeros");
+  console.log(opcionespuertasnumeros);
+  // ramdom para elegir posicion [0] o [1] del array para pintar cabra aleatoriamenete en una de las dos puertas porque no contienen prize
+  let goat_a = opcionespuertasnumeros[0];
+  indexa = goat_a - 1;
+  console.log({ goat_a });
+  console.log({ indexa });
+  if (opcionespuertasnumeros.length > 1) {
+    let goat_b = opcionespuertasnumeros[1];
+    console.log(goat_a + "- goats opciones -" + goat_b);
+  }
+  doors[indexa].innerHTML = `<img src=./img/goat.png>`;
+  doors[indexa].classList.add("open");
+};
+
+
+// Show the car prize
+const drawcar = (doornumber) => {
+  let indexdoornumber = doornumber - 1;
+  doors[indexdoornumber].classList.add("open");
+  doors[indexdoornumber].innerHTML = `<img id='carprize' src=./img/car.png>`;
+  const carimg = document.getElementById("carprize");
+  carimg.style.visibility = "visible";
+};
+
+const showcar = (prizedoor) => {
+  if (cont > 0) {
+    return;
+  } else {
+    if (doorchoosed.length <= 0) {
+      console.log("selecciona una puerta");
+      document.getElementById(
+        "tit"
+      ).innerHTML = `<h1>Please, you must choose a door</h1>`;
+    } else {
+      if (doorchoosed[0] == doorprize[0]) {
+        drawcar(doorprize[0]);
+        //console.log("seleccion ganadora");
+        cont++;
+        console.log({ cont });
+      } else {
+        //console.log("seleccion no ganadora");
+        drawcar(prizedoor);
+      }
+    }
+  }
+};
+
+const manteinselection = () => {
+  // quitar lisener
+  btnswitch.removeEventListener("click", manteinselection);
+  // eleminar visibility grid o btn
+  console.log("mantein selection");
+  // checked to see if he wants o lost
+  let doorsel = doorchoosed[0];
+  let doorwin = doorprize[0];
+  mantein++;
+  win(doorsel, doorwin);
+};
+
+const changeselection = () => {
+  console.log("mantein selection");
+  // quitar lisener
+  btnswitch.removeEventListener("click", manteinselection);
+  // eleminar visibility grid o btn
+  // si seleccion doorselecion == prize y cambias entonce lost,
+  if (doorchoosed[0] == doorprize[0]) {
+    console.log("lost");
+    document.getElementById("tit").innerHTML = `<h1>Sorry you Lost</h1>`;
+    changes++;
+    losers++;
+    //showcar();
+    drawcar(doorprize[0]);
+    btns.remove();
+    btnplay.innerHTML = `<button id='replay'>PLAY AGAIN</button>`;
+    document.getElementById("replay").addEventListener("click", start);
+    document.getElementById("replay").style.visibility = "visible";
+    //drawcar(doorprize[0]);
+  } else {
+    //eles{resto codigo}
+    // check not necessary because only it was maintained closed door with the prize
+    let changedoorsel = doorprize[0];
+    let doorwin = doorprize[0];
+    changes++;
+    win(changedoorsel, doorwin);
+    drawcar(doorprize[0]);
+  }
+};
+
+
 // Check for a match
 const win = (selectdoor, prizedoor) => {
   console.log(selectdoor);
   if (selectdoor == prizedoor) {
     console.log("YOU WIN, CONGRATULATIONS");
+    //doorchoosed[0].classList.remove("doorselec");
     document.getElementById(
       "tit"
     ).innerHTML = `<h1>YOU WIN, CONGRATULATIONS</h1>`;
+    winers++;
+    //añadir clase select
     btnplay.innerHTML = `<button id='replay'>PLAY AGAIN</button>`;
     document.getElementById("replay").addEventListener("click", start);
-    showcar();
+    //showcar(prizedoor);
+    drawcar(prizedoor);
   } else {
     document.getElementById("tit").innerHTML = `<h1>Sorry, YOU LOST</h1>`;
+    losers++;
     btnplay.innerHTML = `<button id='replay'>PLAY AGAIN</button>`;
     document.getElementById("replay").addEventListener("click", start);
-    showcar();
+    //showcar(prizedoor);
+    drawcar(prizedoor);
   }
   btns.style.visibility = "hidden";
-  //start();
+  statistics();
 };
 
 const start = () => {
+  opcionespuertasnumeros = [];
+  opcionespuertasnumeros.unshift("1","2","3");
+  document.getElementById(
+    "tit"
+  ).innerHTML = `<h1>MONTY HALL - SELECT DOOR AGAIN</h1>`;
   document.getElementById("replay").style.visibility = "hidden";
-  console.log("start");
+  games++;
+  console.log({ games });
   // Start to define radom number between 0 and 2 that which will be the prize position
   aleatorio();
   // Loop through the elements of the doors class by adding an event that active selection door
@@ -274,7 +292,14 @@ const start = () => {
   //btnshow.addEventListener("click", showcar);
 };
 
-// Start to define radom number between 0 and 2 that which will be the prize position
+const statistics = () => {
+  console.log({ games }, { changes }, { mantein }, { winers }, { losers });
+};
+
+//////////////////
+// Main progam //
+////////////////
+
 aleatorio();
 // Loop through the elements of the doors class by adding an event that active selection door
 for (let i = 0; i < doors.length; i++) {

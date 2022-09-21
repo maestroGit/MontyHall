@@ -1,10 +1,17 @@
 body {
   display: flex;
   flex-direction: column;
+  margin: 0;
 }
 
 img {
   width: 100px;
+}
+
+h1 {
+  font-family: montserrat;
+  margin: 0 0 10px;
+  font-size: calc(12px + 2vw);
 }
 
 .title {
@@ -66,11 +73,11 @@ img {
 }
 
 .btn-yes:hover {
-  background-color: rgb(79, 244, 3);
+  background-color: rgba(218, 183, 40, 0.817);
 }
 
 .btn-no:hover {
-  background-color: rgb(255, 157, 9);
+  background-color: rgb(255, 9, 9);
 }
 
 .btn-door:focus {
@@ -87,7 +94,7 @@ img {
 
 .btn-no {
   margin: 10px;
-  background-color: rgb(251, 40, 29);
+  background-color: rgb(209, 100, 94);
   width: 100px;
   height: 100px;
   border-radius: 50%;
