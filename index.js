@@ -216,7 +216,9 @@ const changeselection = () => {
     losers++;
     //showcar();
     drawcar(doorprize[0]);
-    btns.remove();
+    //btns.remove();
+    //btns.style.visibility("hidden");
+    document.getElementById("grid").style.visibility = "hidden";
     btnplay.innerHTML = `<button id='replay'>PLAY AGAIN</button>`;
     document.getElementById("replay").addEventListener("click", start);
     document.getElementById("replay").style.visibility = "visible";
@@ -261,6 +263,7 @@ const win = (selectdoor, prizedoor) => {
 };
 
 const start = () => {
+  statistics();
   opcionespuertasnumeros = [];
   opcionespuertasnumeros.unshift("1","2","3");
   document.getElementById(
@@ -268,7 +271,6 @@ const start = () => {
   ).innerHTML = `<h1>MONTY HALL - SELECT DOOR AGAIN</h1>`;
   document.getElementById("replay").style.visibility = "hidden";
   games++;
-  console.log({ games });
   // Start to define radom number between 0 and 2 that which will be the prize position
   aleatorio();
   // Loop through the elements of the doors class by adding an event that active selection door
