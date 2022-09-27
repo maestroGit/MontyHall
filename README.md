@@ -8,5 +8,4 @@ I have tried to simulate the possibilities to change an o maintain a door, showi
 
 If you make more plays, you will see how your probability of winning by changing your selection door is better than maintaining your choice.
 
-icons:
-https://www.flaticon.com/search?word=goat&order_by=4
+icons:[flaticon](https://www.flaticon.com/search?word=goat&order_by=4)
