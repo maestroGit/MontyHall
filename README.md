@@ -8,4 +8,11 @@ I have tried to simulate the possibilities to change an o maintain a door, showi
 
 If you make more plays, you will see how your probability of winning by changing your selection door is better than maintaining your choice.
 
+You choose a door and before knowing if it has a prize or not. One of the other two doors you have not chosen opens, showing that the prize is not there. At that point, you are offered the chance to change your choice for the door that remains to be opened or keep the chosen door.
+
+Two curiosities, one psychological and one mathematical.
+
+First: We do not want to change our decision
+Second: You win more often if you trade.
+
 icons:[flaticon](https://www.flaticon.com/search?word=goat&order_by=4)
