@@ -54,11 +54,11 @@ const selectdoor = (e) => {
         //console.log(doorchoosed[0]); // puerta selecciona añadida a la array en la primera posicion
         //puertas no seleccionadas
         let indice = opcionespuertasnumeros.indexOf(seleccion);
-        //console.log({ indice });
-        let indxoption = opcionespuertasnumeros.find(
-            (element) => element === indice
-        );
-        console.log(indxoption);
+        console.log({ indice });
+        // let indxoption = opcionespuertasnumeros.find(
+        //     (element) => element === indice
+        // );
+        // console.log(indxoption);
         opcionespuertasnumeros.splice(indice, 1);
         console.log("opcionespuertasnumeros door changes");
         console.log(opcionespuertasnumeros);
@@ -66,23 +66,23 @@ const selectdoor = (e) => {
             "tit"
         ).innerHTML = `<h1>Select door nº ${doorchoosed}</h1>`;
     } else {
+        opcionespuertasnumeros = ["1", "2", "3"];
         alldoors = document.getElementsByClassName("door");
         for (let item of alldoors) {
             item.classList.remove("doorselec");
         }
-        //puertaselcionada.classList.add('door');
         doorchoosed.pop();
-        console.log("pop remove");
+        console.log("pop() remove array doorchoosed");
         console.log({ seleccion });
         puertaselcionada.classList.add("doorselec");
         doorchoosed.push(seleccion);
         console.log(doorchoosed);
         let indice = opcionespuertasnumeros.indexOf(seleccion);
         console.log({ indice });
-        let indxoption = opcionespuertasnumeros.find(
-            (element) => element === indice
-        );
-        console.log(indxoption);
+        // let indxoption = opcionespuertasnumeros.find(
+        //     (element) => element === indice
+        // );
+        // console.log(indxoption);
         opcionespuertasnumeros.splice(indice, 1);
         console.log("opcionespuertasnumeros door changes");
         console.log(opcionespuertasnumeros);
@@ -287,7 +287,8 @@ const win = (selectdoor, prizedoor, changedoor) => {
 };
 
 const start = () => {
-    statistics();
+    document.getElementById("table").innerHTML = "";
+    //statistics();
     opcionespuertasnumeros = [];
     changedoor = false;
     opcionespuertasnumeros.unshift("1", "2", "3");
@@ -325,7 +326,52 @@ const start = () => {
 };
 
 const statistics = () => {
+    console.log(percentSwitch = (winersChanges / games) * 100);
     console.log({ games }, { changes }, { mantein }, { winers }, { winersChanges }, { losers }, { losersChanges }, { winersMantein }, { losersMantein });
+    if (changes == 0) {
+        percentSwitch = 0;
+        console.log(percentSwitch);
+    } else {
+        //var conDecimal = numero.toFixed(2);
+        percentSwitch = (winersChanges / games) * 100;
+        percentSwitch = percentSwitch.toFixed(2);
+        console.log("else" +
+            percentSwitch);
+    }
+    if (mantein == 0) {
+        percentMantein = 0;
+    } else {
+        percentMantein = (winersMantein / games) * 100;
+        percentMantein = percentMantein.toFixed(2);
+    }
+    const tables = `<table class="default">
+    <tr>
+      <th scope="row"></th>
+      <th>Switch</th>
+      <th>Mantein</th>
+    </tr>
+    <tr>
+    <th>Winers</th>
+    <td>${winersChanges}</td>
+    <td>${winersMantein}</td>
+    </tr>
+    <tr>
+    <th>Losers</th>
+    <td>${losersChanges}</td>
+    <td>${losersMantein}</td>
+    </tr>
+    <tr>
+      <th>Exits</th>
+      <td>${percentSwitch}%</td>
+      <td>${percentMantein}%</td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <td colspan="2">${games}</td>
+    </tr>
+  </table>`;
+    const table = document.getElementById("table");
+    table.innerHTML = tables;
 };
 
 //////////////////
